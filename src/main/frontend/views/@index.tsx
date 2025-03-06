@@ -6,8 +6,11 @@ import {ChatService} from "Frontend/generated/endpoints";
 import {useEffect} from "react";
 import {Link} from "react-router-dom";
 import AddChannelComponent from "Frontend/views/_AddChannelComponent";
+import {pageTitle} from "Frontend/views/@layout";
 
 export default function LobbyView() {
+    pageTitle.value = "Lobby"
+
     const channels = useSignal<Channel[]>([])
 
     function refreshChannels() {

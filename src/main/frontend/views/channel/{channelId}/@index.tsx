@@ -9,6 +9,7 @@ import {useEffect} from 'react';
 import {Notification} from "@vaadin/react-components";
 import Message from 'Frontend/generated/com/pii/application/chat/Message';
 import {Subscription} from "@vaadin/hilla-frontend";
+import {pageTitle} from "Frontend/views/@layout";
 
 
 export default function ChannelView() {
@@ -23,7 +24,7 @@ export default function ChannelView() {
         if (!channel.value) {
             navigate('/')
         } else {
-            document.title = channel.value.name
+            pageTitle.value = channel.value.name
         }
     }
 
