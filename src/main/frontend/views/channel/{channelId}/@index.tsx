@@ -10,6 +10,7 @@ import {Notification} from "@vaadin/react-components";
 import Message from 'Frontend/generated/com/pii/application/chat/Message';
 import {Subscription} from "@vaadin/hilla-frontend";
 import {pageTitle} from "Frontend/views/@layout";
+import {connectionActive} from "Frontend/util/ConnectionUtil";
 
 const HISTORY_SIZE = 20
 
@@ -75,9 +76,11 @@ export default function ChannelView() {
     }
 
     useEffect(() => {
-        updateChannel().then(subscribe).catch(console.error)
+        if (connectionActive.value) {
+            updateChannel().then(subscribe).catch(console.error)
+        }
         return unsubscribe
-    }, [channelId])
+    }, [channelId, connectionActive.value])
 
     return <VerticalLayout theme="padding spacing" className="h-full">
         <MessageList className="h-full w-full border" items={messages.value.map(message => ({
