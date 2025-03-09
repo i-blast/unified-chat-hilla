@@ -69,9 +69,9 @@ export default function ChannelView() {
             subscription.value = ChatService.liveMessages(channel.value.id)
                 .onNext(receiveMessages)
                 .onError(() => console.error("Error in subscription"))
-            ChatService.messageHistory(channel.value.id, HISTORY_SIZE, undefined)
+            const lastSeenMessage = messages.value.at(-1)
+            ChatService.messageHistory(channel.value.id, HISTORY_SIZE, lastSeenMessage?.messageId)
                 .then(receiveMessages)
-                .catch(console.error)
         }
     }
 
